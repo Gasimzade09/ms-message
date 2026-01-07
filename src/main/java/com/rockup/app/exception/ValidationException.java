@@ -7,6 +7,6 @@ public class ValidationException extends WebSocketException {
 
     @Override
     public String getCode() {
-        return "empty_payload";
+        return "validation_error";
     }
 }

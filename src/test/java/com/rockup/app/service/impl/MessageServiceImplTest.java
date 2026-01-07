@@ -78,14 +78,14 @@ class MessageServiceImplTest {
         updatedEntity.setVersion(1);
         var expected = new MessageResponse(null, request.getPayload(), messageId, entity.getMessageChatN(), updatedEntity.getVersion());
         Mockito.doReturn(Optional.of(entity)).when(repository).findById(messageId);
-        Mockito.doReturn(updatedEntity).when(repository).save(Mockito.any());
+        Mockito.doReturn(updatedEntity).when(repository).saveAndFlush(Mockito.any());
         Mockito.doReturn(expected).when(mapper).entityToResponse(updatedEntity);
 
         var actual = service.editMessage(request);
 
         assertEquals(expected, actual);
         Mockito.verify(repository, Mockito.times(1)).findById(messageId);
-        Mockito.verify(repository, Mockito.times(1)).save(Mockito.any());
+        Mockito.verify(repository, Mockito.times(1)).saveAndFlush(Mockito.any());
         Mockito.verify(mapper, Mockito.times(1)).entityToResponse(updatedEntity);
     }
 

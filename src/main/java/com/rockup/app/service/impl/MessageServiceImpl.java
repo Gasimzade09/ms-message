@@ -47,7 +47,7 @@ public class MessageServiceImpl implements MessageService {
             throw new VersionMismatchException(message.getVersion(), request.getVersion());
         }
         message.setPayload(request.getPayload());
-        message = repository.save(message);
+        message = repository.saveAndFlush(message);
         log.info("ActionLog.editMessage.End");
         return mapper.entityToResponse(message);
     }

@@ -1,11 +1,24 @@
-version: '3.9'
+version: '3.8'
+
 services:
-  risk-checker:
-    container_name: rockup
-    image: postgres
-    ports:
-      - "5434:5432"
+  postgres:
+    image: postgres:18
+    container_name: rockup-db
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 123456
       POSTGRES_DB: rockup
+      POSTGRES_USER: rockup
+      POSTGRES_PASSWORD: 123456
+    ports:
+      - "5432:5432"
+
+  chat-backend:
+    image: ms-message:latest
+    container_name: rockup-backend
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/rockup
+      SPRING_DATASOURCE_USERNAME: rockup
+      SPRING_DATASOURCE_PASSWORD: 123456
+    ports:
+      - "8080:8080"

@@ -1,7 +1,6 @@
 package com.rockup.app.websocket;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import com.rockup.app.model.request.MessageRequest;
 import com.rockup.app.model.type.MessageType;
 import java.net.URI;
@@ -14,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;
@@ -21,7 +21,8 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import tools.jackson.databind.ObjectMapper;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class ChatWebSocketIntegrationTest {
+@ActiveProfiles("test")
+class ChatWebSocketHandlerTest {
 
     @LocalServerPort
     int port;
@@ -53,7 +54,7 @@ class ChatWebSocketIntegrationTest {
         session = client.execute(
                 clientHandler,
                 null,
-                URI.create("ws://localhost:" + port + "/ws")
+                URI.create("ws://localhost:" + port + "/ws/chat")
         ).get(3, TimeUnit.SECONDS);
     }
 
@@ -104,6 +105,7 @@ class ChatWebSocketIntegrationTest {
         String response = responseFuture.get(3, TimeUnit.SECONDS);
 
         assertNotNull(response);
-        assertTrue(response.contains("INVALID_REQUEST") || response.contains("error"));
+        assertTrue(response.contains("validation_error") || response.contains("Unknown message type"));
     }
+
 }
