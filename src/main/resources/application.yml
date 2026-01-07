@@ -1,8 +1,8 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5434/rockup
-    username: postgres
+    url: jdbc:postgresql://localhost:5432/rockup
+    username: rockup
     password: 123456
   jpa:
     hibernate:
