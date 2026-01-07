@@ -42,33 +42,10 @@ This will start **PostgreSQL** and the **chat backend**:
 ```bash
 git clone https://github.com/Gasimzade09/ms-message
 cd ms-message
+docker pull javadevali/ms-message:latest  
 docker-compose up --build
 
 ```
-
-## ⚡ Using the Docker Hub Image
-
-The backend image is already available on Docker Hub:
-
-services:
-postgres:
-image: postgres:18
-environment:
-POSTGRES_DB: chatdb
-POSTGRES_USER: chatuser
-POSTGRES_PASSWORD: chatpass
-ports:
-- "5432:5432"
-
-ms-message:
-image: javadevali/ms-message:latest
-depends_on:
-- postgres
-environment:
-- SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/rockup
-- SPRING_DATASOURCE_USERNAME: rockup
-- SPRING_DATASOURCE_PASSWORD: 123456
-- ports: "8080:8080"
 
 
 ### Start everything:
