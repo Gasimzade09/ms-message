@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-message-unique-index
+      author: Ali Gasimzade
+      changes:
+        - createIndex:
+            indexName: message_ux1
+            tableName: message
+            unique: true
+            columns:
+              - column:
+                  name: chat_id
+                  descending: false
+              - column:
+                  name: message_chat_n
+                  descending: true
+              - column:
+                  name: version
+                  descending: true
