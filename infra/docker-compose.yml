@@ -11,7 +11,7 @@ services:
     ports:
       - "5432:5432"
 
-  chat-backend:
+  ms-message:
     image: ms-message:latest
     container_name: rockup-backend
     depends_on:
