@@ -2,7 +2,6 @@ package com.rockup.app.service.impl;
 
 import com.rockup.app.dao.MessageRepository;
 import com.rockup.app.exception.NotFoundException;
-import com.rockup.app.exception.ValidationException;
 import com.rockup.app.exception.VersionMismatchException;
 import com.rockup.app.mapper.MessageMapper;
 import com.rockup.app.model.entity.MessageEntity;
@@ -11,13 +10,12 @@ import com.rockup.app.model.response.MessageResponse;
 import com.rockup.app.model.response.PageableResponse;
 import com.rockup.app.model.type.MessageStatus;
 import com.rockup.app.service.MessageService;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
